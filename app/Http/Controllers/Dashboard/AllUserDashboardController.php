@@ -39,4 +39,44 @@ class AllUserDashboardController extends Controller
 
         return redirect()->route('createNewUser')->with('newUserSuccess', 'New user created.');
     }
+
+    public function download() {
+        // dd('download');
+        $fileName = 'all_users.csv';
+        $users = User::all();
+
+        $headers = array(
+            "Content-type"        => "text/csv",
+            "Content-Disposition" => "attachment; filename=$fileName",
+            "Pragma"              => "no-cache",
+            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+            "Expires"             => "0"
+        );
+
+        $columns = array('ID', 'Name', 'Username', 'Email', 'Role');
+
+        $callback = function() use($users, $columns) {
+            $file = fopen('php://output', 'w');
+            fputcsv($file, $columns);
+
+            foreach ($users as $user) {
+                $row['ID']  = $user->id;
+                $row['Name']    = $user->name;
+                $row['Username']    = $user->username;
+                $row['Email']  = $user->email;
+                if ($user->role == 1) {
+                    $row['Role']  = 'Admin';
+                } else {
+                    $row['Role']  = 'Employee';
+                }
+                
+
+                fputcsv($file, array($row['ID'], $row['Name'], $row['Username'], $row['Email'], $row['Role']));
+            }
+
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, $headers);
+    }
 }

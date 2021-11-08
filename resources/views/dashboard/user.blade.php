@@ -23,16 +23,20 @@
         <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex justify-content-between">
                 <h6 class="m-0 font-weight-bold text-primary d-flex align-items-center">All users</h6>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newUserModal">New user</button>
+                <div>
+                    <a href="{{ route('downloadAllUser') }}" class="btn btn-outline-primary mr-1"><i class="fas fa-file-export"></i> Export CSV</a>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newUserModal">New user</button>
+                </div>
             </div>
             <!-- Topbar Search -->
             <form
-            class="d-none d-sm-inline-block form-inline w-50 ml-md-3 my-2 mt-4 mw-100 navbar-search">
+            class="d-none d-sm-inline-block form-inline w-50 ml-md-3 my-2 mt-4 mw-100 navbar-search" action="{{ route('searchUser')}}" method="post">
                 <div class="input-group">
-                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                    @csrf
+                    <input name="query" type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
                         aria-label="Search" aria-describedby="basic-addon2">
                     <div class="input-group-append">
-                        <button class="btn btn-primary" type="button">
+                        <button class="btn btn-primary" type="submit">
                             <i class="fas fa-search fa-sm"></i>
                         </button>
                     </div>
@@ -154,7 +158,7 @@
                                     @endif
                                     <td>
                                         <div class="d-flex justify-content-between align-items-center">
-                                            <span class="mr-4">{{ $user->created_at->diffForHumans() }}</span>
+                                            <span class="mr-2">{{ $user->created_at->diffForHumans() }}</span>
                                             <div class="d-flex justify-content-between">
                                                 @if ($user->id !== auth()->user()->id)   
                                                     <div>

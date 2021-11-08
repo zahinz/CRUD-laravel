@@ -47,7 +47,7 @@
                                         <div class="form-group">
                                             <input type="text" name="name" class="form-control form-control-user"
                                             id="exampleInputname" aria-describedby="Your full name"
-                                            placeholder="Full name">
+                                            placeholder="Full name" value="{{ old('name') }}">
                                             {{-- error when the form is empty --}}
                                             @error('name')
                                                 <div class="alert alert-light small" role="alert" style="color: red;">{{ $message }} </div>
@@ -57,7 +57,7 @@
                                         <div class="form-group">
                                             <input type="text" name="username" class="form-control form-control-user"
                                             id="exampleInputusername" aria-describedby="Your username"
-                                            placeholder="Username">
+                                            placeholder="Username" value="{{ old('username') }}">
                                             {{-- error when the form is empty --}}
                                             @error('username')
                                                 <div class="alert alert-light small" role="alert" style="color: red;">{{ $message }} </div>
@@ -67,7 +67,7 @@
                                         <div class="form-group">
                                             <input type="email" name="email" class="form-control form-control-user"
                                             id="exampleInputEmail" aria-describedby="emailHelp"
-                                            placeholder="Enter email address...">
+                                            placeholder="Enter email address..." value="{{ old('email') }}">
                                             {{-- error when the form is empty --}}
                                             @error('email')
                                                 <div class="alert alert-light small" role="alert" style="color: red;">{{ $message }} </div>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Dashboard\AllUserDashboardController;
 use App\Http\Controllers\EditUserController;
+use App\Http\Controllers\SearchUserController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -35,6 +36,9 @@ Route::get('/users', [AllUserDashboardController::class, 'index'])
 Route::post('/users', [AllUserDashboardController::class, 'createNewUser'])
 ->name('createNewUser')
 ->middleware('auth');
+Route::get('/users/download', [AllUserDashboardController::class, 'download'])
+->name('downloadAllUser')
+->middleware('auth');
 
 // edit user route
 Route::get('/user/edit/{user}', [EditUserController::class, 'index'])
@@ -46,5 +50,13 @@ Route::post('/update/{user}', [EditUserController::class, 'update'])
 Route::delete('/user/{user}', [EditUserController::class, 'destroy'])
 ->name('user.destroy')
 ->middleware('auth');
+
+// search user route
+Route::post('/search', [SearchUserController::class, 'index'])
+->name('searchUser')
+->middleware('auth');
+// Route::post('/search', [SearchUserController::class, 'search'])
+// ->middleware('auth');
+
 
 
