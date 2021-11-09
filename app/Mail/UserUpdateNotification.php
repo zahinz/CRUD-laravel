@@ -8,20 +8,20 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class AdminNotification extends Mailable
+class UserUpdateNotification extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $newUser;
+    public $newUpdate;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(User $newUser)
+    public function __construct(User $newUpdate)
     {
-        $this -> newUser = $newUser;
+        $this -> newUpdate = $newUpdate;
     }
 
     /**
@@ -31,7 +31,7 @@ class AdminNotification extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.admin.UserUpdates')
-            ->subject('New user created');
+        return $this->markdown('emails.admin.UserNewUpdates')
+            ->subject('User update');
     }
 }

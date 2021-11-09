@@ -1,7 +1,7 @@
 @component('mail::message')
 # Introduction
 
-{{ $newUser->name }} ({{ $newUser->email }}) has joined the system!
+{{ $newUpdate->name }} ({{ $newUpdate->email }}) has update the account.
 
 @component('mail::button', ['url' => route('dashboard')])
 See dashboard

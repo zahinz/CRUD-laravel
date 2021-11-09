@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Mail\AdminNotification;
+use App\Mail\UserUpdateNotification;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 
@@ -27,7 +28,7 @@ class UserObserver
      */
     public function updated(User $user)
     {
-        //
+        Mail::to('admin@mycompany.com') -> send(new UserUpdateNotification($user));
     }
 
     /**
